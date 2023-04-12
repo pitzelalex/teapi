@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :subscription do
-    tea { nil }
-    customer { nil }
-    title { "MyString" }
-    price { 1 }
-    status { "MyString" }
-    frequency { "MyString" }
+    association :tea
+    association :customer
+    title { Faker::Lorem.sentence(word_count: 2) }
+    price { Faker::Number.between(from: 10000, to: 40000) }
+    status { 1 }
+    frequency { 'Every 3 months' }
   end
 end
