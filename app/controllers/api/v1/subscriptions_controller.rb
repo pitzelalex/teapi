@@ -1,9 +1,16 @@
 class Api::V1::SubscriptionsController < ApplicationController
   def create
     # require 'pry'; binding.pry
-    sub = Subscription.new(sub_params)
-    if sub.save
-      render json: SubscriptionSerializer.new(sub)
+    subscription = Subscription.new(sub_params)
+    if subscription.save
+      render json: SubscriptionSerializer.new(subscription)
+    end
+  end
+
+  def destroy
+    subscription = Subscription.find(params[:id])
+    if subscription.destroy
+      render json: SubscriptionSerializer.new(subscription)
     end
   end
 
