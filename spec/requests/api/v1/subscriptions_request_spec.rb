@@ -31,4 +31,18 @@ describe 'Subscriptions API' do
     expect(created_sub[:data][:attributes][:status]).to eq(new_object.status)
     expect(created_sub[:data][:attributes][:frequency]).to eq(new_object.frequency)
   end
+
+  it 'removes a subscription' do
+    customer = create(:customer)
+    tea = create(:tea)
+    subscription = create(:subscription, tea: tea, customer: customer)
+
+    expect(Subscription.all.count).to eq(1)
+
+    delete "/api/v1/subscriptions/#{subscription.id}"
+
+    expect(response).to be_successful
+
+    expect(Subscription.all.count).to eq(0)
+  end
 end
