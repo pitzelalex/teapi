@@ -9,6 +9,10 @@ Simple API that accesses a PostgreSQL database to manage customers subscriptions
     Ruby on Rails
     PostgreSQL
 
+### Schema
+
+![Screen Shot 2023-04-14 at 11 02 37 AM](https://user-images.githubusercontent.com/112970613/232081009-94693ab5-dd96-46bf-89f4-d02b8be25a0e.png)
+
 ### API Endpoints
 
 #### POST Subscriptions
