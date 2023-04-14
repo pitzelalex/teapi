@@ -1,24 +1,111 @@
-# README
+# Teapi
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Description
 
-Things you may want to cover:
+Simple API that accesses a PostgreSQL database to manage customers subscriptions to various teas. 
 
-* Ruby version
+### Built With
 
-* System dependencies
+    Ruby on Rails
+    PostgreSQL
 
-* Configuration
+### API Endpoints
 
-* Database creation
+#### POST Subscriptions
 
-* Database initialization
+`/api/v1/subscriptions?tea_id={integer}&customer_id={integer}&title={string}&price={integer}&frequency={string}`
 
-* How to run the test suite
+Create a new subscription.
 
-* Services (job queues, cache servers, search engines, etc.)
+Example:
+`GET http://localhost:3000/api/v1/subscriptions?tea_id=1&customer_id=1&title=Test Sub&price=3000&frequency=3 months`
+```
+{
+    "data": {
+        "id": "1",
+        "type": "subscription",
+        "attributes": {
+            "tea_id": 1,
+            "customer_id": 1,
+            "title": "Test Sub",
+            "price": 3000,
+            "status": "Active",
+            "frequency": "3 months"
+        }
+    }
+}
+```
+#### DELETE Subscriptions
 
-* Deployment instructions
+`/api/v1/subscriptions/{subscription_id}`
 
-* ...
+Delete a subscription by it's id.
+
+Example:
+`DELETE http://localhost:3000/api/v1/subscriptions/1`
+```
+{
+    "data": {
+        "id": "1",
+        "type": "subscription",
+        "attributes": {
+            "tea_id": 1,
+            "customer_id": 1,
+            "title": "Test Sub",
+            "price": 3000,
+            "status": "Active",
+            "frequency": "3 months"
+        }
+    }
+}
+```
+
+#### GET Customers Subscriptions
+`/api/v1/customers/{customer_id}/subscriptions`
+
+Return a collection of subscriptions belonging to a customer.
+
+Example:
+`GET http://localhost:3000/api/v1/customers/1/subscriptions`
+```
+{
+    "data": [
+        {
+            "id": "2",
+            "type": "subscription",
+            "attributes": {
+                "tea_id": 1,
+                "customer_id": 1,
+                "title": "Test Sub",
+                "price": 3000,
+                "status": "Active",
+                "frequency": "3 months"
+            }
+        },
+        {
+            "id": "3",
+            "type": "subscription",
+            "attributes": {
+                "tea_id": 1,
+                "customer_id": 1,
+                "title": "Another Sub",
+                "price": 25000,
+                "status": "Active",
+                "frequency": "1.5 months"
+            }
+        }
+    ]
+}
+```
+
+### Setup
+
+This project requires Ruby 2.7.4.
+
+* Fork this repository
+* Clone your fork
+* From the command line, install gems and set up your DB:
+    * `bundle`
+    * `rails db:create`
+    * Use `rails c` to enter some Customers and Teas
+    * Use `rails s` to make Postman queries
